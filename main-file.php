@@ -30,10 +30,15 @@ add_action( 'admin_init', 'storikaze_upon_admin' );
 if ( ! function_exists( 'storikaze_fix_sort_order_in_qry' ) ) :
 function storikaze_fix_sort_order_in_qry ( $query )
 {
-	if ( ! $GLOBALS["storikaze_admin_now"] )
-	{
-		$query->set('order','ASC');
-	}
+	
+	// We do not want the order reversed on the admin panels -
+	// only the actual public web-site.
+	if ( $GLOBALS["storikaze_admin_now"] ) { return; }
+	
+	// We also do not want it reversing the order on the feeds.
+	if ( is_feed() ) { return; }
+	
+	$query->set('order','ASC');
 }
 endif; // twentyfifteen_setup
 add_action( 'pre_get_posts', 'storikaze_fix_sort_order_in_qry' );
