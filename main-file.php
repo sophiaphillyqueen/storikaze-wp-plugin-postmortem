@@ -55,7 +55,7 @@ function storikaze_tag_at ( $atts, $content = null ) {
 	foreach ( $atts as $thenom => $theval )
 	{
 		
-		if ( $thenom = "from" )
+		if ( $thenom == "from" )
 		{
 			if ( $timecode < strtotime($theval) ) { return ""; }
 		}
@@ -65,7 +65,7 @@ function storikaze_tag_at ( $atts, $content = null ) {
 		// at the end of the TOC -- but only once you know at what
 		// time the very last installation of the story will be
 		// added).
-		if ( $thenom = "to" )
+		if ( $thenom == "to" )
 		{
 			if ( $timecode > strtotime($theval) ) { return ""; }
 		}
@@ -76,7 +76,15 @@ function storikaze_tag_at ( $atts, $content = null ) {
 endif;
 add_shortcode( 'storikaze_at', 'storikaze_tag_at' );
 
-
+// Even though it is primarily for debugging purposes, I need to
+// be able to know what time Storikaze has it as.
+if ( ! function_exists( 'storikaze_tag_now' ) ) :
+function storikaze_tag_now ( $atts )
+{
+  return $GLOBALS["storikaze_time_now"];
+}
+endif;
+add_shortcode( 'storikaze_now', 'storikaze_tag_now' );
 
 
 ?>
