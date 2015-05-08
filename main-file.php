@@ -10,16 +10,6 @@
 // the date once per run.
 $storikaze_time_now = current_time('mysql');
 
-// And it is important for Storikaze to know whether or not we are
-// running in admin mode.
-$storikaze_admin_now = false;
-if ( ! function_exists( 'storikaze_upon_admin' ) ) :
-function storikaze_upon_admin ( )
-{
-	$GLOBALS["storikaze_admin_now"] = true;
-}
-endif;
-add_action( 'admin_init', 'storikaze_upon_admin' );
 
 
 // WordPress was originally written for blogs - and therefore
@@ -33,7 +23,7 @@ function storikaze_fix_sort_order_in_qry ( $query )
 	
 	// We do not want the order reversed on the admin panels -
 	// only the actual public web-site.
-	if ( $GLOBALS["storikaze_admin_now"] ) { return; }
+	if ( is_admin() ) { return; }
 	
 	// We also do not want it reversing the order on the feeds.
 	if ( is_feed() ) { return; }
@@ -56,6 +46,14 @@ add_action( 'pre_get_posts', 'storikaze_fix_sort_order_in_qry' );
 if ( ! function_exists( 'storikaze_tag_at' ) ) :
 function storikaze_tag_at ( $atts, $content = null ) {
 	$timecode = strtotime($GLOBALS["storikaze_time_now"]);
+	
+	
+	// Of course, if the page is being displayed in preview mode,
+	// we want anything to show up. (This part of code may change
+	// if there is a way to have a preview with a particular
+	// point in time specified.)
+	if ( is_preview() ) { return $content; }
+	
 	
 	foreach ( $atts as $thenom => $theval )
 	{
