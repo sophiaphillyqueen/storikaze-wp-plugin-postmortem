@@ -1,8 +1,12 @@
 <?php
 /**
  * Plugin Name: Storikaze Wordpress Plugin
+ * Plugin URI: https://github.com/sophiaphillyqueen/storikaze-wp-plugin
  * Description: Gets WordPress to act as a Webserial fiction manager rather than a blog
- * License: GPL2
+ * Version: 0.0.1
+ * Author: Sophia Elizabeth Shapira
+ * Author URI: https://github.com/sophiaphillyqueen
+ * License: GPL2+
  */
 
 
