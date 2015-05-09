@@ -3,7 +3,7 @@
  * Plugin Name: Storikaze Wordpress Plugin
  * Plugin URI: https://github.com/sophiaphillyqueen/storikaze-wp-plugin
  * Description: Gets WordPress to act as a Webserial fiction manager rather than a blog
- * Version: 0.0.1
+ * Version: 0.0.2
  * Author: Sophia Elizabeth Shapira
  * Author URI: https://github.com/sophiaphillyqueen
  * License: GPL2+
@@ -92,6 +92,61 @@ function storikaze_tag_now ( $atts )
 }
 endif;
 add_shortcode( 'storikaze_now', 'storikaze_tag_now' );
+
+
+// Now we will create the function to set up the story-element-appearnce
+// array --- and use it.
+// The first argument of the function is the array of the story text
+// gimmick.
+// The second argument of the function is the priority-level (2 for the
+// plug-in's defaults - 1 for an override from the theme) and the third
+// is an array that is to be the contents of the story-elemant-appearance
+// variable.
+if ( ! function_exists( 'storikaze_tex_gim_set' ) ) :
+function storikaze_tex_gim_set ( $trgnom, $priorty, $valua )
+{
+  // Do NOT register anything that isn't an array.
+  if ( ! is_array($valua) ) { return; }
+  
+  // If the target array doesn't exist as an array, create it now.
+  if ( ! is_array($GLOBALS["storikaze_tex_gim_r"]) )
+  {
+    $GLOBALS["storikaze_tex_gim_r"] = array();
+  }
+  
+  // If the gimmick does not currently exist, let us set it
+  // and be done with this function.
+  if ( ! is_array($GLOBALS["storikaze_tex_gim_r"][$trgnom]) )
+  {
+    $GLOBALS["storikaze_tex_gim_r"][$trgnom] = array($priorty,$valua);
+    return;
+  }
+  
+  // Now, if something already is there, we change it only if the
+  // current priority level is higher (i.e. a smaller number) than
+  // the old one.
+  $curray = $GLOBALS["storikaze_tex_gim_r"][$trgnom];
+  if ( $curray[0] > $priorty )
+  {
+    $GLOBALS["storikaze_tex_gim_r"][$trgnom] = array($priorty,$valua);
+    return;
+  }
+}
+endif;
+storikaze_tex_gim_set("segbreak",2,array("slval" => "\n\n\n<hr />\n\n"));
+
+if ( ! function_exists( 'storikaze_tag_segbreak' ) ) :
+function storikaze_tag_segbreak ( $atts )
+{
+  if ( !is_array($GLOBALS["storikaze_tex_gim_r"]) ) { return ""; }
+  if ( !is_array($GLOBALS["storikaze_tex_gim_r"]["segbreak"]) ) { return ""; }
+  $refera = $GLOBALS["storikaze_tex_gim_r"]["segbreak"];
+  if ( !is_array($refera[1]) ) { return ""; }
+  $referb = $refera[1];
+  return ( $referb["slval"] );
+}
+endif;
+add_shortcode( 'storikaze_segbreak', 'storikaze_tag_segbreak' );
 
 
 ?>
