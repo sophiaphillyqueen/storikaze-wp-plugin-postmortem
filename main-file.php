@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Storikaze Wordpress Plugin
- * Plugin URI: https://github.com/sophiaphillyqueen/storikaze-wp-plugin
+ * Plugin URI: https://storikaze.org
  * Description: Gets WordPress to act as a Webserial fiction manager rather than a blog
- * Version: 0.0.2
+ * Version: 0.0.3
  * Author: Sophia Elizabeth Shapira
- * Author URI: https://github.com/sophiaphillyqueen
+ * Author URI: https://sshapira.com
  * License: GPL2+
  */
 
@@ -88,7 +88,7 @@ add_shortcode( 'storikaze_at', 'storikaze_tag_at' );
 if ( ! function_exists( 'storikaze_tag_now' ) ) :
 function storikaze_tag_now ( $atts )
 {
-  return $GLOBALS["storikaze_time_now"];
+	return $GLOBALS["storikaze_time_now"];
 }
 endif;
 add_shortcode( 'storikaze_now', 'storikaze_tag_now' );
@@ -105,48 +105,84 @@ add_shortcode( 'storikaze_now', 'storikaze_tag_now' );
 if ( ! function_exists( 'storikaze_tex_gim_set' ) ) :
 function storikaze_tex_gim_set ( $trgnom, $priorty, $valua )
 {
-  // Do NOT register anything that isn't an array.
-  if ( ! is_array($valua) ) { return; }
-  
-  // If the target array doesn't exist as an array, create it now.
-  if ( ! is_array($GLOBALS["storikaze_tex_gim_r"]) )
-  {
-    $GLOBALS["storikaze_tex_gim_r"] = array();
-  }
-  
-  // If the gimmick does not currently exist, let us set it
-  // and be done with this function.
-  if ( ! is_array($GLOBALS["storikaze_tex_gim_r"][$trgnom]) )
-  {
-    $GLOBALS["storikaze_tex_gim_r"][$trgnom] = array($priorty,$valua);
-    return;
-  }
-  
-  // Now, if something already is there, we change it only if the
-  // current priority level is higher (i.e. a smaller number) than
-  // the old one.
-  $curray = $GLOBALS["storikaze_tex_gim_r"][$trgnom];
-  if ( $curray[0] > $priorty )
-  {
-    $GLOBALS["storikaze_tex_gim_r"][$trgnom] = array($priorty,$valua);
-    return;
-  }
+	// Do NOT register anything that isn't an array.
+	if ( ! is_array($valua) ) { return; }
+	
+	// If the target array doesn't exist as an array, create it now.
+	if ( ! is_array($GLOBALS["storikaze_tex_gim_r"]) )
+	{
+		$GLOBALS["storikaze_tex_gim_r"] = array();
+	}
+	
+	// If the gimmick does not currently exist, let us set it
+	// and be done with this function.
+	if ( ! is_array($GLOBALS["storikaze_tex_gim_r"][$trgnom]) )
+	{
+		$GLOBALS["storikaze_tex_gim_r"][$trgnom] = array($priorty,$valua);
+		return;
+	}
+	
+	// Now, if something already is there, we change it only if the
+	// current priority level is higher (i.e. a smaller number) than
+	// the old one.
+	$curray = $GLOBALS["storikaze_tex_gim_r"][$trgnom];
+	if ( $curray[0] > $priorty )
+	{
+		$GLOBALS["storikaze_tex_gim_r"][$trgnom] = array($priorty,$valua);
+		return;
+	}
 }
 endif;
-storikaze_tex_gim_set("segbreak",2,array("slval" => "\n\n\n<hr />\n\n"));
 
+// The tag [storikaze_segbreak /] should be used in places within
+// a chapter where there is a narrative shift such as a scene change.
 if ( ! function_exists( 'storikaze_tag_segbreak' ) ) :
 function storikaze_tag_segbreak ( $atts )
 {
-  if ( !is_array($GLOBALS["storikaze_tex_gim_r"]) ) { return ""; }
-  if ( !is_array($GLOBALS["storikaze_tex_gim_r"]["segbreak"]) ) { return ""; }
-  $refera = $GLOBALS["storikaze_tex_gim_r"]["segbreak"];
-  if ( !is_array($refera[1]) ) { return ""; }
-  $referb = $refera[1];
-  return ( $referb["slval"] );
+	if ( !is_array($GLOBALS["storikaze_tex_gim_r"]) ) { return ""; }
+	if ( !is_array($GLOBALS["storikaze_tex_gim_r"]["segbreak"]) ) { return ""; }
+	$refera = $GLOBALS["storikaze_tex_gim_r"]["segbreak"];
+	if ( !is_array($refera[1]) ) { return ""; }
+	$referb = $refera[1];
+	return ( $referb["slval"] );
 }
 endif;
 add_shortcode( 'storikaze_segbreak', 'storikaze_tag_segbreak' );
+storikaze_tex_gim_set("segbreak",2,array(
+"slval" => "\n\n<div align = \"center\"><p>* &nbsp; &nbsp; * &nbsp; &nbsp; *</p></div>\n\n"
+));
+
+// The tag [storikaze_chbreak /] should be used at the end of
+// the final post of every chapter.
+if ( ! function_exists( 'storikaze_tag_chbreak' ) ) :
+function storikaze_tag_chbreak ( $atts )
+{
+	if ( !is_array($GLOBALS["storikaze_tex_gim_r"]) ) { return ""; }
+	if ( !is_array($GLOBALS["storikaze_tex_gim_r"]["chbreak"]) ) { return ""; }
+	$refera = $GLOBALS["storikaze_tex_gim_r"]["chbreak"];
+	if ( !is_array($refera[1]) ) { return ""; }
+	$referb = $refera[1];
+	return ( $referb["slval"] );
+}
+endif;
+add_shortcode( 'storikaze_chbreak', 'storikaze_tag_chbreak' );
+storikaze_tex_gim_set("chbreak",2,array(
+"slval" => "\n\n\n\n"
+));
+
+
+// The [storikaze_info] shortcode exists to store information
+// related to the structural organization of the fiction. It isn't
+// used much by the current version of the plug-in - but it could
+// very well be used by future versions, as well as by accessory
+// programs - so it is important that it be used correctly with
+// the correct attributes.
+if ( ! function_exists( 'storikaze_tag_info' ) ) :
+function storikaze_tag_info ( $atts, $content = null ) {
+	return "";
+}
+endif;
+add_shortcode( 'storikaze_info', 'storikaze_tag_info' );
 
 
 ?>
