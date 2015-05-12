@@ -3,7 +3,7 @@
  * Plugin Name: Storikaze Wordpress Plugin
  * Plugin URI: https://storikaze.org
  * Description: Gets WordPress to act as a Webserial fiction manager rather than a blog
- * Version: 0.0.3
+ * Version: 0.0.4
  * Author: Sophia Elizabeth Shapira
  * Author URI: https://sshapira.com
  * License: GPL2+
@@ -98,10 +98,14 @@ add_shortcode( 'storikaze_now', 'storikaze_tag_now' );
 // array --- and use it.
 // The first argument of the function is the array of the story text
 // gimmick.
-// The second argument of the function is the priority-level (2 for the
-// plug-in's defaults - 1 for an override from the theme) and the third
+// The second argument of the function is the priority area-level and the third
 // is an array that is to be the contents of the story-elemant-appearance
 // variable.
+//
+// Eventually, once this feature is improved, it will be possible for
+// Storikaze-aware themes to override the defaults set by this function
+// --- but we ask to please wait till *that* feature is a *bit* more
+// developed.
 if ( ! function_exists( 'storikaze_tex_gim_set' ) ) :
 function storikaze_tex_gim_set ( $trgnom, $priorty, $valua )
 {
