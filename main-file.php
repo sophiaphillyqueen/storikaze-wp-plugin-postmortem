@@ -152,7 +152,7 @@ function storikaze_tag_segbreak ( $atts )
 }
 endif;
 add_shortcode( 'storikaze_segbreak', 'storikaze_tag_segbreak' );
-storikaze_tex_gim_set("segbreak",2,array(
+storikaze_tex_gim_set("segbreak",'default',array(
 "slval" => "\n\n<div align = \"center\"><p>* &nbsp; &nbsp; * &nbsp; &nbsp; *</p></div>\n\n"
 ));
 
@@ -170,7 +170,7 @@ function storikaze_tag_chbreak ( $atts )
 }
 endif;
 add_shortcode( 'storikaze_chbreak', 'storikaze_tag_chbreak' );
-storikaze_tex_gim_set("chbreak",2,array(
+storikaze_tex_gim_set("chbreak",'default',array(
 "slval" => "\n\n\n\n"
 ));
 
