@@ -3,7 +3,7 @@
  * Plugin Name: Storikaze Wordpress Plugin
  * Plugin URI: https://storikaze.org
  * Description: Gets WordPress to act as a Webserial fiction manager rather than a blog
- * Version: 0.0.4.4
+ * Version: 0.0.4.5
  * Author: Sophia Elizabeth Shapira
  * Author URI: https://sshapira.com
  * License: GPL2+
@@ -31,6 +31,13 @@ function storikaze_fix_sort_order_in_qry ( $query )
 	
 	// We also do not want it reversing the order on the feeds.
 	if ( is_feed() ) { return; }
+	
+	// Also -- when viewing individual post-pages, we do not
+	// want the "next" and "previous" buttons mixed up.
+	if ( is_single() )
+	{
+		if ( ! is_archive() ) { return; }
+	}
 	
 	$query->set('order','ASC');
 }
