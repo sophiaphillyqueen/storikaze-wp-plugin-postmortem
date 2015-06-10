@@ -26,6 +26,18 @@ function storikaze_adcn_social_fun ( $content ) {
     $reto .= '  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";' . "\n";
     $reto .= '  fjs.parentNode.insertBefore(js, fjs);' . "\n";
     $reto .= '}(document, \'script\', \'facebook-jssdk\'));</script>' . "\n";
+    
+    // Add the Google pretext
+    if ( 2 > 1 )
+    {
+      $reto .= '<script>   ' . "\n";
+      $reto .= '(function() {' . "\n";
+      $reto .= '  var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;' . "\n";
+      $reto .= '  po.src = \'https://apis.google.com/js/plusone.js\';' . "\n";
+      $reto .= '  var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);' . "\n";
+      $reto .= '})();' . "\n";
+      $reto .= '</script>' . "\n";
+    }
   }
   
   $reto .= $content;
@@ -57,6 +69,13 @@ function storikaze_adcn_social_fun ( $content ) {
   $reto .= 'fjs.parentNode.insertBefore(js,fjs);}}';
   $reto .= '(document, \'script\', \'twitter-wjs\');';
   $reto .= '</script>' . "\n";
+  
+  // Add the Google button
+  $reto .= '<div id="g-plus-footer" class="g-plus"';
+  $reto .= ' data-href="' . $clrc . '"';
+  $reto .= ' data-action="share"';
+  $reto .= ' data-annotation="bubble"';
+  $reto .= '></div>';
   
   $GLOBALS['storikaze_adcn_social_first'] = false;
   return $reto;
