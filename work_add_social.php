@@ -5,15 +5,40 @@
 // old universal" rule as far as new options are concerned.
 add_option('storikaze_social', 'yes');
 
+// ---------------------------------------- //
+// -- BEGIN SOCIAL NETWORKING FLAG SETUP -- //
+// ---------------------------------------- //
+// Storikaze social networking flags ....
+// ... as some social networking sites are displayed only where they are under
+// development, while others are A-okay.
+$storikaze_social_flg = array();
+
+$storikaze_social_flg["linkedin"] = file_exists(dirname(__FILE__) . "/dvflags/linkedin.txt");
+$storikaze_social_flg["tumblr"] = file_exists(dirname(__FILE__) . "/dvflags/tumblr.txt");
+
+// And last but not least ---- presence of the *main* development flag file
+// turns on all the others.
+if ( file_exists(dirname(__FILE__) . "/dvflags/main.txt") )
+{
+  $storikaze_social_flg["linkedin"] = true;
+  $storikaze_social_flg["tumblr"] = true;
+}
+
+// -------------------------------------- //
+// -- END SOCIAL NETWORKING FLAG SETUP -- //
+// -------------------------------------- //
+
+
 if ( ! function_exists('storikaze_adcn_social_fun') ) :
 function storikaze_adcn_social_fun ( $content ) {
   $reto = "";
   $curloc = get_permalink();
-  $clrc = htmlspecialchars($curloc);
+  $clrc = esc_attr($curloc);
   $ttx_up = get_the_title();
-  $ttx_pr = htmlspecialchars($ttx_up);
+  $ttx_pr = esc_attr($ttx_up);
   $blgnm_up = get_bloginfo('name');
-  $blgnm_pr = htmlspecialchars($blgnm_up);
+  $blgnm_pr = esc_attr($blgnm_up);
+  $flogs = $GLOBALS["storikaze_social_flg"];
   
   if ( $GLOBALS['storikaze_adcn_social_first'] )
   {
@@ -38,6 +63,22 @@ function storikaze_adcn_social_fun ( $content ) {
       $reto .= '})();' . "\n";
       $reto .= '</script>' . "\n";
     }
+  }
+  
+  // Add the LinkedIn pretext
+  if ( $flogs["linkedin"] )
+  {
+    $reto .= '<script src="//platform.linkedin.com/in.js"';
+    $reto .= ' type="text/javascript"> lang: en_US</script>' . "\n";
+  }
+  
+  // Add the tumblr pretext:
+  if ( $flogs["tumblr"] )
+  {
+    $reto .= '<script';
+    $reto .= ' id="tumblr-js"';
+    $reto .= ' async src="https://assets.tumblr.com/share-button.js"';
+    $reto .= '></script>' . "\n";
   }
   
   $reto .= $content;
@@ -71,11 +112,42 @@ function storikaze_adcn_social_fun ( $content ) {
   $reto .= '</script>' . "\n";
   
   // Add the Google button
-  $reto .= '<div id="g-plus-footer" class="g-plus"';
-  $reto .= ' data-href="' . $clrc . '"';
-  $reto .= ' data-action="share"';
-  $reto .= ' data-annotation="bubble"';
-  $reto .= '></div>';
+  // See this: http://stackoverflow.com/questions/15479250/google-share-button-custom-href-url
+  if ( 2 > 1 )
+  {
+    $reto .= '<div id="g-plus-footer" class="g-plus"';
+    $reto .= ' data-href="' . $clrc . '"';
+    $reto .= ' data-action="share"';
+    $reto .= ' data-annotation="bubble"';
+    $reto .= '></div>' . "\n";
+  }
+  
+  // Add the LinkedIn button
+  // I can learn more for this: https://developer.linkedin.com/docs/share-on-linkedin
+  // Read about esc_attr(): https://codex.wordpress.org/Function_Reference/esc_attr
+  if ( $flogs["linkedin"] )
+  {
+    $reto .= '<script type="IN/Share"';
+    $reto .= ' data-url="' . $clrc . '"';
+    $reto .= ' data-counter="right"';
+    //$reto .= ' data-description="' . esc_attr(substr($content,0,50)) . '"';
+    $reto .= '></script>' . "\n";
+  }
+  
+  // Add the tumblr button
+  // Documented here: https://www.tumblr.com/docs/en/share_button
+  // And I feel safer with exc_html: https://codex.wordpress.org/Function_Reference/esc_html
+  if ( $flogs["tumblr"] )
+  {
+    $reto .= '<a';
+    $reto .= ' class="tumblr-share-button"';
+    $reto .= ' href="https://www.tumblr.com/share"';
+    $reto .= ' data-href="' . $clrc . '"';
+    $reto .= ' data-content="' . esc_attr(wp_trim_words(wp_strip_all_tags($content),17)) . '"';
+    $reto .= '></a>';
+    //$reto .= 'BambaRoo';
+    $reto .= "\n";
+  }
   
   $GLOBALS['storikaze_adcn_social_first'] = false;
   return $reto;
