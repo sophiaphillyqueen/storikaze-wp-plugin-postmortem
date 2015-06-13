@@ -4,7 +4,6 @@ if ( ! function_exists('storikaze_tag_verse') ) :
 function storikaze_tag_verse ( $atts, $content = null ) {
   $ret = "";
   
-  $ret .= "\n\n";
   $ret .= '<em>';
   
   $cn_a = preg_replace(
@@ -22,7 +21,7 @@ function storikaze_tag_verse ( $atts, $content = null ) {
   $ret .= "&nbsp; &nbsp; ";
   $ret .= $content;
   $ret .= '</em>';
-  $ret .= "\n\n";
+  $ret .= "</p><p>";
   
   return $ret;
 }
