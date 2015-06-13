@@ -21,6 +21,9 @@ $storikaze_social_flg["tumblr"] = file_exists(dirname(__FILE__) . "/dvflags/tumb
 if ( file_exists(dirname(__FILE__) . "/dvflags/main.txt") )
 {
   $storikaze_social_flg["linkedin"] = true;
+}
+if ( 2 > 1 )
+{
   $storikaze_social_flg["tumblr"] = true;
 }
 
@@ -143,9 +146,22 @@ function storikaze_adcn_social_fun ( $content ) {
     $reto .= ' class="tumblr-share-button"';
     $reto .= ' href="https://www.tumblr.com/share"';
     $reto .= ' data-href="' . $clrc . '"';
-    $reto .= ' data-content="' . esc_attr(wp_trim_words(wp_strip_all_tags($content),17)) . '"';
+    
+    $temp_a = $content;
+    
+    $temp_b = preg_replace(
+      array(
+        '~\[storikaze_segbreak /\]~',
+        '~\[storikaze_chbreak /\]~'
+      ), array (
+        "\n\n* * *\n\n",
+        "\n\n\n"
+      ),
+    $temp_a);
+    
+    $temp_x = $temp_b;
+    $reto .= ' data-content="' . esc_attr(wp_trim_words($temp_x,70)) . '"';
     $reto .= '></a>';
-    //$reto .= 'BambaRoo';
     $reto .= "\n";
   }
   

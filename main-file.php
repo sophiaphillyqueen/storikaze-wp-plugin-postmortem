@@ -233,6 +233,6 @@ endif;
 add_shortcode( 'storikaze_until', 'storikaze_tag_until' );
 
 
-require(dirname(__FILE__) . "/work_add_social.php");
+require_once(dirname(__FILE__) . "/work_add_social.php");
 
 ?>
