@@ -22,6 +22,8 @@ if ( file_exists(dirname(__FILE__) . "/dvflags/main.txt") )
 {
   $storikaze_social_flg["linkedin"] = true;
 }
+
+// And the following social buttons have been declared ready for live use:
 if ( 2 > 1 )
 {
   $storikaze_social_flg["tumblr"] = true;
