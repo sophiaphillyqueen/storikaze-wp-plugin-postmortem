@@ -90,31 +90,35 @@ function storikaze_adcn_social_fun ( $content ) {
   
   
   // Add Facebook Button
-  $reto .= '<div class="fb-like" data-href="';
-  $reto .= $clrc;
-  $reto .= '" data-layout="button_count" data-action="like"';
-  $reto .= ' data-show-faces="true" data-share="true"></div>';
-  $reto .= "\n";
+  $tmreto = "";
+  $tmreto .= '<div class="fb-like" data-href="';
+  $tmreto .= $clrc;
+  $tmreto .= '" data-layout="button_count" data-action="like"';
+  $tmreto .= ' data-show-faces="true" data-share="true"></div>';
+  $tmreto .= "\n";
+  $reto .= "[storikaze_x_prsv]" . rawurlencode($tmreto) . "[/storikaze_x_prsv]";
   
   // Add twitter button
   // Used this site as resource: https://about.twitter.com/resources/buttons#tweet
-  $reto .= '<a href="https://twitter.com/share" class="twitter-share-button"';
-  $reto .= ' data-url="';
-  $reto .= $clrc;
-  $reto .= '" data-text="';
-  $reto .= $blgnm_pr;
-  $reto .= ': ';
-  $reto .= $ttx_pr;
-  $reto .= '"';
-  //$reto .= ' data-via="SophiannaGirl"';
-  $reto .= '>Tweet</a> <script>!function(d,s,id)';
-  $reto .= '{var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?';
-  $reto .= '\'http\':\'https\';if(!d.getElementById(id))';
-  $reto .= '{js=d.createElement(s);js.id=id;js.src=';
-  $reto .= 'p+\'://platform.twitter.com/widgets.js\';';
-  $reto .= 'fjs.parentNode.insertBefore(js,fjs);}}';
-  $reto .= '(document, \'script\', \'twitter-wjs\');';
-  $reto .= '</script>' . "\n";
+  $tmreto = "";
+  $tmreto .= '<a href="https://twitter.com/share" class="twitter-share-button"';
+  $tmreto .= ' data-url="';
+  $tmreto .= $clrc;
+  $tmreto .= '" data-text="';
+  $tmreto .= $blgnm_pr;
+  $tmreto .= ': ';
+  $tmreto .= $ttx_pr;
+  $tmreto .= '"';
+  //$tmreto .= ' data-via="SophiannaGirl"';
+  $tmreto .= '>Tweet</a> <script>!function(d,s,id)';
+  $tmreto .= '{var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?';
+  $tmreto .= '\'http\':\'https\';if(!d.getElementById(id))';
+  $tmreto .= '{js=d.createElement(s);js.id=id;js.src=';
+  $tmreto .= 'p+\'://platform.twitter.com/widgets.js\';';
+  $tmreto .= 'fjs.parentNode.insertBefore(js,fjs);}}';
+  $tmreto .= '(document, \'script\', \'twitter-wjs\');';
+  $tmreto .= '</script>' . "\n";
+  $reto .= "[storikaze_x_prsv]" . rawurlencode($tmreto) . "[/storikaze_x_prsv]";
   
   // Add the Google button
   // See this: http://stackoverflow.com/questions/15479250/google-share-button-custom-href-url
@@ -132,11 +136,13 @@ function storikaze_adcn_social_fun ( $content ) {
   // Read about esc_attr(): https://codex.wordpress.org/Function_Reference/esc_attr
   if ( $flogs["linkedin"] )
   {
-    $reto .= '<script type="IN/Share"';
-    $reto .= ' data-url="' . $clrc . '"';
-    $reto .= ' data-counter="right"';
-    //$reto .= ' data-description="' . esc_attr(substr($content,0,50)) . '"';
-    $reto .= '></script>' . "\n";
+    $tmreto = "";
+    $tmreto .= '<script type="IN/Share"';
+    $tmreto .= ' data-url="' . $clrc . '"';
+    $tmreto .= ' data-counter="right"';
+    $tmreto .= ' data-description="' . esc_attr(substr($content,0,50)) . '"';
+    $tmreto .= '></script>' . "\n";
+    $reto .= "[storikaze_x_prsv]" . rawurlencode($tmreto) . "[/storikaze_x_prsv]";
   }
   
   // Add the tumblr button
