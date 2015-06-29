@@ -7,8 +7,9 @@ return function ( $paramos, $fildos )
   $postid = $code_item[0];
   
   $theval = get_post_field($fildos,$postid);
+  $thenval = wpautop($theval);
   
-  $ret .= htmlspecialchars($theval);
+  $ret .= do_shortcode($thenval);
   
   return $ret;
 }
