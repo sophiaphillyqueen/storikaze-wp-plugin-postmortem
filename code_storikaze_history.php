@@ -51,7 +51,7 @@ function storikaze_tag_history ( $atts, $content = null ) {
   
   
   
-  $nseca = $sectona[1];
+  $nseca = do_shortcode($sectona[1]);
   while ( $nseca != "" )
   {
     $prca = explode("{{",$nseca,2);
