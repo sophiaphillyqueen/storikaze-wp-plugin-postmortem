@@ -19,6 +19,11 @@ return function ( $paramos )
     return call_user_func($GLOBALS["storikaze_tllx"]["proc_code"]["do_permalink"],$argi[1]);
   }
   
+  if ( $argi[0] == "plink" )
+  {
+    return call_user_func($GLOBALS["storikaze_tllx"]["proc_code"]["do_p_permalink"],$argi[1]);
+  }
+  
   if ( $argi[0] == "date" )
   {
     return call_user_func($GLOBALS["storikaze_tllx"]["proc_code"]["do_visudate"],$argi[1]);
