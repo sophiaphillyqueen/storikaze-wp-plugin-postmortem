@@ -16,6 +16,11 @@ $storikaze_time_now = current_time('mysql');
 
 
 
+// Just to get shortcodes to work in the widgets:
+add_filter('widget_text', 'do_shortcode');
+
+
+
 // WordPress was originally written for blogs - and therefore
 // sorts the entries so that the most recent one appears first.
 // However, that is not what we want in webfiction - so this
@@ -242,8 +247,5 @@ require_once(dirname(__FILE__) . "/code_storikaze_verse.php");
 require_once(dirname(__FILE__) . "/code_storikaze_history.php");
 
 require_once(dirname(__FILE__) . "/work_add_social.php");
-
-// Just to get shortcodes to work in the widgets:
-add_filter('widget_text', 'do_shortcode');
 
 ?>
