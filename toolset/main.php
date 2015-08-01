@@ -17,6 +17,9 @@ $storikaze_tllx = array(
     "July","August","Septempber",
     "October","November","December",
   ),
+  
+  // Despensible ID-Counter:
+  "dispid" => 0,
 );
 
 ?>

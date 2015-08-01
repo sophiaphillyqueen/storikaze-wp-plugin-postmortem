@@ -239,6 +239,7 @@ add_shortcode( 'storikaze_until', 'storikaze_tag_until' );
 
 require_once(dirname(__FILE__) . "/toolset/main.php");
 
+require_once(dirname(__FILE__) . "/code_storikaze_wbr.php" );
 
 require_once(dirname(__FILE__) . "/code_storikaze_prsv.php");
 
@@ -247,5 +248,7 @@ require_once(dirname(__FILE__) . "/code_storikaze_verse.php");
 require_once(dirname(__FILE__) . "/code_storikaze_history.php");
 
 require_once(dirname(__FILE__) . "/work_add_social.php");
+
+require_once(dirname(__FILE__) . "/menucode/main.php");
 
 ?>
