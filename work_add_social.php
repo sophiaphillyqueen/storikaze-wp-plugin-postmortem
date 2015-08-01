@@ -1,10 +1,5 @@
 <?
 
-// Having it already set the option now so that *eventually*
-// I will have a way-out of the "default behavior is the
-// old universal" rule as far as new options are concerned.
-add_option('storikaze_social', 'yes');
-
 // ---------------------------------------- //
 // -- BEGIN SOCIAL NETWORKING FLAG SETUP -- //
 // ---------------------------------------- //

@@ -9,6 +9,9 @@ $storikaze_tllx = array(
   // For non-reverse sorting
   "sort_t_code" => include(dirname(__FILE__)."/f_sort_t_code.php"),
   
+  // To fetch the current Directorial URL (not including trailing /)
+  "get_dirurl" => include(dirname(__FILE__)."/f_get_dirurl.php"),
+  
   "proc_code" => include(dirname(__FILE__)."/proc_code/main.php"),
   "months_f" => array
   (
