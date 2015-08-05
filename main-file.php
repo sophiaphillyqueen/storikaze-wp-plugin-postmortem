@@ -245,6 +245,8 @@ require_once(dirname(__FILE__) . "/code_storikaze_prsv.php");
 
 require_once(dirname(__FILE__) . "/code_storikaze_verse.php");
 
+require_once(dirname(__FILE__) . "/code_storikaze_istx.php");
+
 require_once(dirname(__FILE__) . "/code_storikaze_history.php");
 
 require_once(dirname(__FILE__) . "/work_add_social.php");
