@@ -104,7 +104,16 @@ function storikaze_adcn_social_fun ( $content ) {
   $tmreto .= ': ';
   $tmreto .= $ttx_pr;
   $tmreto .= '"';
-  //$tmreto .= ' data-via="SophiannaGirl"';
+  
+  $name_of_twitter = get_option("storikaze_social_twitter","");
+  if ( $name_of_twitter != "" )
+  {
+    $tmreto .= ' data-via="';
+    $tmreto .= esc_attr($name_of_twitter);
+    $tmreto .= '"';
+    //$tmreto .= ' data-via="SophiannaGirl"';
+  }
+  
   $tmreto .= '>Tweet</a> <script>!function(d,s,id)';
   $tmreto .= '{var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?';
   $tmreto .= '\'http\':\'https\';if(!d.getElementById(id))';
