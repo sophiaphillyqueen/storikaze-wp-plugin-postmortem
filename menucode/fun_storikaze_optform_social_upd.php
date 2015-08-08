@@ -3,13 +3,25 @@
 function storikaze_optform_social_upd ( ) {
   $returnhdr = "Location: " . $_SERVER{"HTTP_REFERER"};
   
+  
+  if ( $_REQUEST{"network"} == "media_panel_off" )
+  {
+    update_option("storikaze_social","no");
+    header($returnhdr);
+    return true;
+  }
+  if ( $_REQUEST{"network"} == "media_panel_on" )
+  {
+    update_option("storikaze_social","yes");
+    header($returnhdr);
+    return true;
+  }
+  
+  // First, if the information is on a Twitter
   if ( $_REQUEST{"network"} == "twitter" )
   {
     $lctrma = $_REQUEST{"userid"};
-    $lctrmb = sanitize_text_field($lctrma);
-    //header("Content-type: text/plain");
-    //echo $lctrma . ":\n";
-    //echo $lctrmb . ":\n";
+    $lctrmb = esc_html($lctrma);
     if ( $lctrma == $lctrmb )
     {
       update_option("storikaze_social_twitter",$lctrma);
@@ -20,9 +32,6 @@ function storikaze_optform_social_upd ( ) {
   
   header($returnhdr);
   return true;
-  //header("Content-type: text/plain");
-  //echo "<h1>GOCHA</h1>";
-  //var_dump($_SERVER);
 }
 
 ?>

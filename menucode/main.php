@@ -1,9 +1,8 @@
 <?php
 
-// Having it already set the option now so that *eventually*
-// I will have a way-out of the "default behavior is the
-// old universal" rule as far as new options are concerned.
-add_option('storikaze_social', 'yes');
+// The default for all new installations of this plugin is that
+// the social panel be off.
+add_option('storikaze_social', 'no');
 
 // By default, there are no Storikaze reference sites.
 //add_option('storikaze_refls','*');
