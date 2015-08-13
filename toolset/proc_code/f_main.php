@@ -1,8 +1,41 @@
 <?
 
-return function ( $paramos )
+return function ( $paramos, $thevulcan )
 {
   $argi = explode(":",$paramos,2);
+  $gologic = $thevulcan->removal;
+  
+  if ( $argi[0] == "hide" )
+  {
+    $thevulcan->removal = ((int)($gologic + 1.2)); return "";
+  }
+  if ( $argi[0] == "else" )
+  {
+    if ( $gologic > 1.5 ) { return ""; }
+    $thevulcan->removal = ((int)(1.2 - $gologic));
+    return "";
+  }
+  if ( $argi[0] == "endif" )
+  {
+    if ( $gologic < 0.5 ) { return ""; }
+    $thevulcan->removal = ((int)($gologic - 0.8));
+  }
+  if ( $argi[0] == "hasfuture" )
+  {
+    if ( $gologic > 0.5 )
+    {
+      $thevulcan->removal = ((int)($gologic + 1.2));
+      return "";
+    }
+    $code_list = $GLOBALS["storikaze_tllx"]["proc_code"]["fvray"];
+    $raysiz = count($code_list);
+    if ( $raysiz < ( $argi[1] - 0.5 ) ) { $thevulcan->removal = 1; }
+    return "";
+  }
+  
+  # This next clause ends the logic section:
+  if ( $gologic > 0.5 ) { return ""; }
+  
   
   if ( $argi[0] == "title" )
   {

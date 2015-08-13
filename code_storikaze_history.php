@@ -2,6 +2,8 @@
 
 if ( ! function_exists('storikaze_tag_history') ) :
 function storikaze_tag_history ( $atts, $content = null ) {
+  $thevulcan = new stdClass;
+  $thevulcan->removal = 0; // Code of removals from yes-this-part
   $timecode = strtotime($GLOBALS["storikaze_time_now"]);
   $ret = "";
   
@@ -55,7 +57,7 @@ function storikaze_tag_history ( $atts, $content = null ) {
   while ( $nseca != "" )
   {
     $prca = explode("{{",$nseca,2);
-    $ret .= $prca[0];
+    if ( $thevulcan->removal < 0.5 ) { $ret .= $prca[0]; }
     $zamia = ( $nseca != $prca[0] ); // Have we reached the end?
     $prcb = explode("}}",$prca[1],2);
     $nseca = $prcb[1];
@@ -64,7 +66,7 @@ function storikaze_tag_history ( $atts, $content = null ) {
     // -- because at that point, there *should* be no valid code available.
     if ( $zamia )
     {
-      $ret .= call_user_func($GLOBALS["storikaze_tllx"]["proc_code"]["main"],$prcb[0]);
+      $ret .= call_user_func($GLOBALS["storikaze_tllx"]["proc_code"]["main"],$prcb[0],$thevulcan);
     }
   }
   
