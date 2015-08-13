@@ -1,5 +1,16 @@
 <?php
 
+if ( ! function_exists( 'storikaze_tl01_power' ) ) :
+function storikaze_tl01_power ( $thepowr )
+{
+  if ( $thepowr == "inf__is_mobile" )
+  {
+    return wp_is_mobile();
+  }
+  return current_user_can($thepowr);
+}
+endif;
+
 if ( ! function_exists( 'storikaze_tag_power' ) ) :
 function storikaze_tag_power ( $atts, $content = null ) {
   if ( ! is_array($atts) ) { return ""; }
@@ -11,7 +22,7 @@ function storikaze_tag_power ( $atts, $content = null ) {
     $attra = explode(":",$atts["xcp"]);
     foreach ( $attra as $attro )
     {
-      if ( current_user_can($attro) ) { $goesok = true; }
+      if ( storikaze_tl01_power($attro) ) { $goesok = true; }
     }
   }
   if ( $loesok )
@@ -19,7 +30,7 @@ function storikaze_tag_power ( $atts, $content = null ) {
     $attra = explode(":",$atts["xcp"]);
     foreach ( $attra as $attro )
     {
-      if ( current_user_can($attro) ) { $goesok = false; }
+      if ( storikaze_tl01_power($attro) ) { $goesok = false; }
     }
   }
   if ( $goesok ) { return $content; }
