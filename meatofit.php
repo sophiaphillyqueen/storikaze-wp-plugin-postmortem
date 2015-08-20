@@ -207,7 +207,10 @@ require_once(dirname(__FILE__) . "/code_storikaze_istx.php");
 
 require_once(dirname(__FILE__) . "/code_storikaze_history.php");
 
+require_once(dirname(__FILE__) . "/code_storikaze_adc.php");
+
 require_once(dirname(__FILE__) . "/work_add_social.php");
+require_once(dirname(__FILE__) . "/work_add/main.php");
 
 require_once(dirname(__FILE__) . "/menucode/main.php");
 

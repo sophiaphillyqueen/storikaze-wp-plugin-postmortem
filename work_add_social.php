@@ -185,7 +185,6 @@ function storikaze_adcn_social_fun ( $content ) {
 }
 endif;
 $storikaze_adcn_social_first = true;
-add_filter( 'the_content', 'storikaze_adcn_social_fun' );
 
 
 ?>
