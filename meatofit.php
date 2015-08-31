@@ -5,6 +5,8 @@
 // the date once per run.
 $storikaze_time_now = current_time('mysql');
 
+//$storikaze_foolproof_id = "x";
+
 
 
 // Just to get shortcodes to work in the widgets:
@@ -178,6 +180,7 @@ storikaze_tex_gim_set("chbreak",'default',array(
 ));
 
 
+
 // The [storikaze_info] shortcode exists to store information
 // related to the structural organization of the fiction. It isn't
 // used much by the current version of the plug-in - but it could
@@ -190,6 +193,8 @@ function storikaze_tag_info ( $atts, $content = null ) {
 }
 endif;
 add_shortcode( 'storikaze_info', 'storikaze_tag_info' );
+
+require_once(dirname(__FILE__) . "/adc_cls/main.php");
 
 require_once(dirname(__FILE__) . "/toolset/main.php");
 
