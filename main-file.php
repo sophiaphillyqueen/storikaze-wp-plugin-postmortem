@@ -3,7 +3,7 @@
  * Plugin Name: Storikaze Wordpress Plugin
  * Plugin URI: https://storikaze.org
  * Description: Gets WordPress to act as a Webserial fiction manager rather than a blog
- * Version: 0.0.4.12
+ * Version: 0.0.4.13d
  * Author: Sophia Elizabeth Shapira
  * Author URI: https://sshapira.com
  * License: GPL2+
