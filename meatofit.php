@@ -194,6 +194,10 @@ function storikaze_tag_info ( $atts, $content = null ) {
 endif;
 add_shortcode( 'storikaze_info', 'storikaze_tag_info' );
 
+require_once(dirname(__FILE__) . "/utlf/f_storikaze_lcvar_file.php");
+
+require_once(dirname(__FILE__) . "/csfun/main.php");
+
 require_once(dirname(__FILE__) . "/adc_cls/main.php");
 
 require_once(dirname(__FILE__) . "/toolset/main.php");
